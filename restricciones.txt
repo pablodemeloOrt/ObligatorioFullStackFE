@@ -1,0 +1,21 @@
+Al crear una tarea:
+
+- Si user.role === "admin" → puede crearla para cualquiera.
+
+- Si user.role === "usuario" → solo puede crearla asignándosela a sí mismo.
+
+Al editar una tarea:
+
+- Si es admin → sin restricciones.
+
+- Si es usuario → solo si tarea.assignedTo == user._id.
+
+Al mover una tarea de columna:
+
+- Todos pueden mover sus propias tareas.
+
+- Solo admin puede mover las de otros.
+
+Al eliminar una tarea:
+
+- Solo admin puede eliminar.
