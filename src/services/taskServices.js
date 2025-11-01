@@ -35,7 +35,7 @@ export const getTasksService = (projectId) => {
             throw error;
         });
 }
-export const addTaskService = (title) => {
+export const addTaskService = (title, projectId) => {
     const token = localStorage.getItem('token');
 
     return fetch(`${urlBase}/tasks`, {
@@ -44,7 +44,7 @@ export const addTaskService = (title) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ title: title })
+        body: JSON.stringify({ title: title, projectId: projectId})
     })
         .then(response => {
             if (!response.ok) {
