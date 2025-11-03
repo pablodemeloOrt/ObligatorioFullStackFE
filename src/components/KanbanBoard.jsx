@@ -14,10 +14,8 @@ const KanbanBoard = () => {
 
   // Filtrar tareas por categoría/status
   const getTasksByStatus = (status) => {
-    const list = Array.isArray(taskList)
-      ? taskList
-      : (taskList?.tasks || taskList?.data || []);
-    return list.filter((task) => task?.status === status) || [];
+    const tasks = taskList?.tasks || [];
+    return tasks.filter((task) => task?.status === status) || [];
   };
 
   return (

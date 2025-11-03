@@ -1,27 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = [];
+//const initialState = [];
 const taskSlice = createSlice({
     name: "taskSlice",
-    initialState,
+    initialState: {
+        tasks: [],
+        loading: false,
+        error: null
+    },
     reducers: {
 
         cargarTareasIniciales: (state, action) => {
             const tareasIniciales = action.payload;
-            return tareasIniciales;
+            state.tasks = tareasIniciales;
         },
+
 
         //funcion para agregar tareas
         addTaskSlice: (state, action) => {
-            const newTask = action.payload;
-            state.push(newTask);
-            console.log("state en redux", state);
+            state.tasks.push(action.payload);
         },
 
         //funcion para borrar tarea
         deleteTaskSlice: (state, action) => {
-            const idDelete = action.payload;
-            const taskFiltered = state.filter((task) => (task._id || task.id) != idDelete);
-            return taskFiltered;
+            state.tasks = state.tasks.filter(t => t._id !== action.payload);
         },
 
 
@@ -45,11 +46,9 @@ const taskSlice = createSlice({
 
         //funcion para actualizar tarea completa
         updateTaskSlice: (state, action) => {
-            const { id, title, description } = action.payload;
-            const task = state.find((task) => (task._id || task.id) === id);
-            if (task) {
-                if (title !== undefined) task.title = title;
-                if (description !== undefined) task.description = description;
+            const index = state.tasks.findIndex(t => t._id === action.payload._id);
+            if (index !== -1) {
+                state.tasks[index] = action.payload;
             }
         }
 

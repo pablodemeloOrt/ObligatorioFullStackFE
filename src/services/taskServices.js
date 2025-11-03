@@ -1,5 +1,5 @@
 import axios from 'axios';
-import  { urlBase } from '../constants/constants.js';
+import { urlBase } from '../constants/constants.js';
 
 
 
@@ -44,24 +44,16 @@ export const addTaskService = (title, projectId) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ title: title, projectId: projectId})
+        body: JSON.stringify({ title: title, projectId: projectId })
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(json => {
-            console.log(json)
-            return json;
-        })
+        .then(res => res.json())
+        .then(json => json.tarea || json);
 }
 
 
 export const deleteTaskService = (id) => {
     const token = localStorage.getItem('token');
-    
+
     return fetch(`${urlBase}/tasks/${id}`, {
         method: 'DELETE',
         headers: {
@@ -86,7 +78,7 @@ export const updateTaskStatusService = (idTask, newStatus) => {
     // Convertimos la clave interna 'in_progress' -> 'in-progress' antes de enviar
     const mapToBackendStatus = (s) => {
         if (s === 'in_progress') return 'in-progress';
-        
+
         return s;
     }
 
@@ -114,7 +106,7 @@ export const updateTaskStatusService = (idTask, newStatus) => {
 
 export const updateTaskService = (idTask, taskData) => {
     const token = localStorage.getItem('token');
-    
+
     return fetch(`${urlBase}/tasks/${idTask}`, {
         method: 'PUT',
         headers: {
