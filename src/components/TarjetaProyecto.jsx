@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 
+
 const TarjetaProyecto = ({ _id, id, name, description, members, createdAt }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
