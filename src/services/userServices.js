@@ -46,6 +46,7 @@ export const registerService = async (name, email, password) => {
             {
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
+                    "Authorization": `Bearer ${token}`
                 }
             }
         );
@@ -62,7 +63,7 @@ export const upgradePlanService = async (userId) => {
         const response = await axios.patch(
             `${urlBase}/users/plan/upgrade/${userId}`,
             {
-                plan: 'premium'
+                
             },
             {
                 headers: {
