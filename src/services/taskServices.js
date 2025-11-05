@@ -35,21 +35,30 @@ export const getTasksService = (projectId) => {
             throw error;
         });
 }
-export const addTaskService = (title, projectId) => {
-    const token = localStorage.getItem('token');
+export const addTaskService = async ({ title, description, projectId }) => {
+  const token = localStorage.getItem("token");
 
-    return fetch(`${urlBase}/tasks`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ title: title, projectId: projectId })
-    })
-        .then(res => res.json())
-        .then(json => json.tarea || json);
-}
+  const res = await fetch(`${urlBase}/tasks`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title,
+      description,
+      projectId,
+    }),
+  });
 
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Error al crear tarea");
+  }
+
+ const data = await res.json();
+  return data.data || data;
+};
 
 export const deleteTaskService = (id) => {
     const token = localStorage.getItem('token');

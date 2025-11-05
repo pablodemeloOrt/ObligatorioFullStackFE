@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import KanbanColumn from "./KanbanColumn";
 
 const KanbanBoard = () => {
-  const taskList = useSelector((state) => state.taskSlice);
+ // const taskList = useSelector((state) => state.taskSlice);
   const [dateFilter, setDateFilter] = useState("all"); 
 
   const categories = [
@@ -13,9 +13,9 @@ const KanbanBoard = () => {
     { key: "done", title: "Completado" }
   ];
 
-  const list = Array.isArray(taskList)
-    ? taskList
-    : (taskList?.tasks || taskList?.data || []);
+  
+const list = useSelector((state) => state.taskSlice.tasks);
+
 
   // 🧮 función auxiliar que calcula el límite según el filtro
   const getFilteredTasks = useMemo(() => {
