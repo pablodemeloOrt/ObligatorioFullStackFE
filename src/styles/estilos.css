@@ -48,6 +48,32 @@
   min-height: 600px;
 }
 
+/*==Login==*/
+.login-language-buttons {
+  margin-top: 20px;
+}
+
+.login-language-button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: 1px solid #D7D7D7;
+  border-radius: 4px;
+  background-color: #ca92ff;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.login-language-button:hover {
+  background-color: #af62f7;
+  color: white;
+}
+
+.login-language-button:first-child {
+  margin-left: 0;
+}
+
 /*==Agregar==*/
 .agregar {
   border: 1px solid #D7D7D7;

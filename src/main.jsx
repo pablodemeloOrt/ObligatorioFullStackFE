@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { store } from "./redux/stores.js";
 import { Provider } from "react-redux";
 import Rutas from "./routes/Routes.jsx";
+import "./i18n.js";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
