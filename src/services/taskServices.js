@@ -35,30 +35,30 @@ export const getTasksService = (projectId) => {
             throw error;
         });
 }
-export const addTaskService = (title, projectId) => {
-    const token = localStorage.getItem('token');
+export const addTaskService = async ({ title, description, projectId }) => {
+  const token = localStorage.getItem("token");
 
-    return fetch(`${urlBase}/tasks`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ title: title, projectId: projectId })
-    })
-        .then(async (res) => {
-            const json = await res.json();
-            
-            if (!res.ok) {
-                // Si la respuesta no es exitosa (403, 400, etc.), lanzar error con el mensaje del servidor
-                const errorMessage = json.message || json.error || `Error ${res.status}: ${res.statusText}`;
-                throw new Error(errorMessage);
-            }
-            
-            return json.tarea || json;
-        });
-}
+  const res = await fetch(`${urlBase}/tasks`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title,
+      description,
+      projectId,
+    }),
+  });
 
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Error al crear tarea");
+  }
+
+ const data = await res.json();
+  return data.data || data;
+};
 
 export const deleteTaskService = (id) => {
     const token = localStorage.getItem('token');
