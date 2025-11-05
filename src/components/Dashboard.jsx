@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Agregar from "./Agregar.jsx";
 import { getTasksService } from "../services/taskServices.js";
 import { useDispatch, useSelector } from "react-redux";
 import { cargarTareasIniciales } from "../redux/features/taskSlice.js";
 import { getUsersSlice } from "../redux/features/user/userThunk.js";
 import Spinner from "./Spinner.jsx";
 import Menu from "./Menu.jsx";
+import UsageIndicator from "./IndicadorUso.jsx";
+import CambioPlan from "./CambioPlan.jsx";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 
 
@@ -66,6 +67,10 @@ const Dashboard = () => {
     return (
       <div className="contenido">
         <Menu title={"Tareas"}></Menu>
+        <div className="info-cards-container">
+          <UsageIndicator />
+          <CambioPlan />
+        </div>
         <Outlet></Outlet>
       </div>
     );

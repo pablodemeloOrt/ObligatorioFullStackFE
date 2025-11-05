@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { deleteProjectSlice } from "../redux/features/projectSlice";
+import { deleteProjectSlice, cargarProyectosIniciales } from "../redux/features/projectSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteProjectService } from "../services/projectServices";
+import { deleteProjectService, getProjectsService } from "../services/projectServices";
 import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
+import AgregarMiembroModal from "./AgregarMiembroModal";
 
 
 const TarjetaProyecto = ({ _id, id, name, description, members, createdAt }) => {
@@ -14,6 +15,7 @@ const TarjetaProyecto = ({ _id, id, name, description, members, createdAt }) => 
   const navigate = useNavigate();
   const projectId = _id || id; // Usar _id de la API o id como fallback
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const handleViewTasks = () => {
     navigate(`/project/${projectId}`);
@@ -53,6 +55,16 @@ const TarjetaProyecto = ({ _id, id, name, description, members, createdAt }) => 
     });
   };
 
+  const handleMemberAdded = async () => {
+    // Recargar los proyectos para actualizar la lista de miembros
+    try {
+      const proyectos = await getProjectsService();
+      dispatch(cargarProyectosIniciales(proyectos));
+    } catch (error) {
+      console.error("Error recargando proyectos:", error);
+    }
+  };
+
   return (
     <Card style={{ marginBottom: '15px' }}>
       {error && (
@@ -83,15 +95,26 @@ const TarjetaProyecto = ({ _id, id, name, description, members, createdAt }) => 
           <strong>Creado:</strong> {formatDate(createdAt)}
         </Card.Text>
         
-        <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '15px', flexWrap: 'wrap' }}>
           <Button variant="primary" size="sm" onClick={handleViewTasks}>
             Ver Tareas
+          </Button>
+          <Button variant="success" size="sm" onClick={() => setShowModal(true)}>
+            + Agregar Miembro
           </Button>
           <Button variant="danger" size="sm" onClick={handleDelete}>
             Eliminar Proyecto
           </Button>
         </div>
       </Card.Body>
+      
+      <AgregarMiembroModal 
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        projectId={projectId}
+        currentMembers={members}
+        onMemberAdded={handleMemberAdded}
+      />
     </Card>
   );
 };

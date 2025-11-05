@@ -44,10 +44,12 @@ export const deleteProjectService = (id) => {
 
 export const addProjectService = (name, description) => {
     const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
     
     return axios.post(`${urlBase}/projects`, {
         name: name,
-        description: description
+        description: description,
+        owner: userId
     }, {
         headers: {
             'Content-Type': 'application/json',
@@ -60,6 +62,46 @@ export const addProjectService = (name, description) => {
         })
         .catch(error => {
             console.error('Error in addProjectService:', error);
+            throw error;
+        });
+}
+
+export const addMemberToProjectService = (projectId, userId) => {
+    const token = localStorage.getItem('token');
+    
+    return axios.post(`${urlBase}/projects/${projectId}/members`, {
+        userId: userId
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            console.log('Add member response:', response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error('Error in addMemberToProjectService:', error);
+            throw error;
+        });
+}
+
+export const getAllUsersService = () => {
+    const token = localStorage.getItem('token');
+    
+    return axios.get(`${urlBase}/users`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            console.log('Get all users response:', response.data);
+            return response.data.users || response.data || [];
+        })
+        .catch(error => {
+            console.error('Error in getAllUsersService:', error);
             throw error;
         });
 }
