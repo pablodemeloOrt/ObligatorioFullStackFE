@@ -24,7 +24,7 @@ const Agregar = ({ projectId }) => {
     setError("");
     setLoading(true);
     try {
-      // addTaskService(title) -> backend crea la tarea y la devuelve   
+    
       const created = await addTaskService(title, projectId);
       const createdTask = created?.payload || created?.data || created;
       dispatch(addTaskSlice(createdTask));

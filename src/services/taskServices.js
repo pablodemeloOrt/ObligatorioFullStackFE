@@ -46,8 +46,17 @@ export const addTaskService = (title, projectId) => {
         },
         body: JSON.stringify({ title: title, projectId: projectId })
     })
-        .then(res => res.json())
-        .then(json => json.tarea || json);
+        .then(async (res) => {
+            const json = await res.json();
+            
+            if (!res.ok) {
+                // Si la respuesta no es exitosa (403, 400, etc.), lanzar error con el mensaje del servidor
+                const errorMessage = json.message || json.error || `Error ${res.status}: ${res.statusText}`;
+                throw new Error(errorMessage);
+            }
+            
+            return json.tarea || json;
+        });
 }
 
 
