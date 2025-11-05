@@ -29,7 +29,7 @@ const taskSlice = createSlice({
         //funcion check tarea
         checkTaskSlice: (state, action) => {
             const { id, completed } = action.payload;
-            const task = state.find((task) => (task._id || task.id) === id);
+            const task = state.tasks.find((task) => (task._id || task.id) === id);
             if (task) {
                 task.completed = completed;
             }
@@ -38,7 +38,7 @@ const taskSlice = createSlice({
         //funcion para actualizar status de tarea
         updateTaskStatusSlice: (state, action) => {
             const { id, status } = action.payload;
-            const task = state.find((task) => (task._id || task.id) === id);
+            const task = state.tasks.find((task) => (task._id || task.id) === id);
             if (task) {
                 task.status = status;
             }
@@ -46,15 +46,15 @@ const taskSlice = createSlice({
 
         //funcion para actualizar tarea completa
         updateTaskSlice: (state, action) => {
-            const index = state.tasks.findIndex(t => t._id === action.payload._id);
-            if (index !== -1) {
-                state.tasks[index] = action.payload;
+            const { id, title, description } = action.payload;
+            if (Array.isArray(state.tasks)) {
+                const task = state.tasks.find((t) => (t._id || t.id) === id);
+                if (task) {
+                    task.title = title;
+                    task.description = description;
+                }
             }
         }
-
-
-
-
 
 
     }
