@@ -34,19 +34,25 @@ export const loginService = async (email, password) => {
     }
 }
 
-export const registerService = async (name, email, password) => {
+export const registerService = async (name, email, password, profileImage = null) => {
     try {
+        const requestBody = {
+            name: name,
+            email: email,
+            password: password
+        };
+
+        // Si se proporciona una imagen de perfil, la incluimos
+        if (profileImage) {
+            requestBody.profileImage = profileImage;
+        }
+
         const response = await axios.post(
             `${urlBase}/signup`,
-            {
-                name: name,
-                email: email,
-                password: password
-            },
+            requestBody,
             {
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
-                    "Authorization": `Bearer ${token}`
                 }
             }
         );

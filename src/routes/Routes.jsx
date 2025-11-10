@@ -4,7 +4,6 @@ import Dashboard from "../components/Dashboard";
 import Home from "../components/Home";
 import Contenido from "../components/Contenido";
 import Proyectos from "../components/Proyectos";
-import Graficas from "../components/GraficaTareasCompletadas";
 import Signup from "../components/Registrar.jsx";
 
 const Rutas = () => {
@@ -18,7 +17,6 @@ const Rutas = () => {
         </Route>
         <Route path="/project/:id" element={<Dashboard />}>
           <Route index element={<Contenido />} />
-          <Route path="graficas" element={<Graficas />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace></Navigate>}></Route>

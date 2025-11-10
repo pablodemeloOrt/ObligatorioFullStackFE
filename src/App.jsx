@@ -24,7 +24,6 @@ const App = () => {
 
       {logueado && (
         <>
-          {/* <Menu></Menu> */}
           <Dashboard />
         </>
       )}
