@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Grafica from "./Grafica";
+import Grafica from "../components/Grafica";
+import GraficaTareasPorEstado from "../components/GraficaTareasPorEstado";
 import { useSelector } from "react-redux";
 
 const Graficas = () => {
-  const listaTareas = useSelector((state) => state.taskSlice);
+  const listaTareas = useSelector((state) => state.taskSlice.tasks);
 
   const [tareasCompletadas, setTareasCompletadas] = useState([]);
 
@@ -22,7 +23,7 @@ const Graficas = () => {
 
     setTareasCompletadas(valores);
     setListaUsuarios(listaUserID);
-  }, []);
+  }, [listaTareas]);
 
   const callback = (acc, tarea) => {
     console.log("acc", acc);
@@ -37,10 +38,24 @@ const Graficas = () => {
   };
 
   return (
-    <>
-      <div>Graficas</div>
-      <Grafica etiquetas={listaUsuarios} datos={tareasCompletadas}></Grafica>
-    </>
+    <div style={{ padding: '20px' }}>
+      <h2 style={{ marginBottom: '30px', textAlign: 'center' }}>Estadísticas de Tareas</h2>
+      
+      {/* Gráfica de tareas por estado */}
+      <GraficaTareasPorEstado />
+      
+      {/* Gráfica de tareas completadas por usuario */}
+      {tareasCompletadas.length > 0 && (
+        <div style={{ maxWidth: '800px', margin: '40px auto 20px' }}>
+          <Grafica 
+            etiquetas={listaUsuarios} 
+            datos={tareasCompletadas}
+            nombreGrafica="Tareas Completadas por Usuario"
+            nombreDatos="Tareas Completadas"
+          />
+        </div>
+      )}
+    </div>
   );
 };
 

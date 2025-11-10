@@ -4,12 +4,14 @@ import Alert from "react-bootstrap/Alert";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { registerService } from "../services/userServices.js";
+import SubirImagenComponent from "./SubirImagenComponent.jsx";
 
 const Registrar = () => {
   const [valores, setValores] = useState({ name: "", email: "", password: "", confirmPassword: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
 
   const navigate = useNavigate();
 
@@ -28,7 +30,12 @@ const Registrar = () => {
 
     try {
       console.log("Intentando registrar con:", valores);
-      const response = await registerService(valores.name, valores.email, valores.password);
+      const response = await registerService(
+        valores.name, 
+        valores.email, 
+        valores.password, 
+        profileImageUrl
+      );
       console.log("Respuesta del registro:", response);
 
       // Mostrar mensaje de éxito y navegar a login
@@ -134,6 +141,17 @@ const Registrar = () => {
           <Form.Control.Feedback>
             Las contraseñas coinciden.
           </Form.Control.Feedback>
+        </Form.Group>
+
+        {/* Campo de imagen de perfil */}
+        <Form.Group className="mb-3" controlId="formBasicProfileImage">
+          <Form.Label>Foto de perfil (opcional)</Form.Label>
+          <SubirImagenComponent 
+            onImageUploaded={setProfileImageUrl}
+            buttonText="Seleccionar foto de perfil"
+            maxSizeMB={5}
+            previewSize={150}
+          />
         </Form.Group>
         
         <Button variant="primary" type="submit" disabled={loading}>

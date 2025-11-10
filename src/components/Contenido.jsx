@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Agregar from "./Agregar";
 import KanbanBoard from "./KanbanBoard";
+import GraficaTareasPorEstado from "./GraficaTareasPorEstado";
 import { useDispatch } from "react-redux";
 import { getTasksService } from "../services/taskServices";
 import { cargarTareasIniciales } from "../redux/features/taskSlice";
@@ -27,6 +28,11 @@ const Contenido = () => {
 
   return (
     <div className="contenido">
+      
+
+      <div style={{ maxWidth: '600px', margin: '20px auto' }}>
+        <GraficaTareasPorEstado />
+      </div>
       <Agregar projectId={id} />
       <KanbanBoard />
     </div>

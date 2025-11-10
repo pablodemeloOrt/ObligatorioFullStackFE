@@ -8,6 +8,7 @@ import { Plan } from "../constants/constants";
 const Menu = ({ title = "Menu" }) => {
   const navigate = useNavigate();
   const [userPlan, setUserPlan] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
     loadUserPlan();
@@ -19,6 +20,7 @@ const Menu = ({ title = "Menu" }) => {
       if (userId) {
         const userData = await getCurrentUserService(userId);
         setUserPlan(userData.plan || Plan.PLUS);
+        setProfileImage(userData.profileImage || null);
       }
     } catch (error) {
       console.log("Error loading user plan:", error);
@@ -77,6 +79,15 @@ const Menu = ({ title = "Menu" }) => {
             </ul>
 
             <div className="d-flex align-items-center gap-2">
+              {profileImage && (
+                <img 
+                  src={profileImage} 
+                  alt="Avatar" 
+                  className="user-avatar"
+                  title="Perfil de usuario"
+                />
+              )}
+              
               {userPlan && (
                 <Badge bg={getPlanBadgeVariant(userPlan)} className="me-2">
                   Plan: {getPlanDisplayName(userPlan)}

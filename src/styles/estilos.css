@@ -40,6 +40,22 @@
   text-align: center;
 }
 
+/* Avatar de usuario en el menú */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dee2e6;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 /*==contenido==*/
 .contenido {
   max-width: auto;
@@ -72,6 +88,48 @@
 
 .login-language-button:first-child {
   margin-left: 0;
+}
+
+/*==Subir Imagen Component==*/
+.subir-imagen-container {
+  text-align: center;
+}
+
+.image-preview-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-preview {
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  transition: opacity 0.2s;
+}
+
+.image-preview:hover {
+  opacity: 0.9;
+}
+
+.image-remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.image-remove-btn:hover {
+  background-color: #c82333;
 }
 
 /*==Agregar==*/
