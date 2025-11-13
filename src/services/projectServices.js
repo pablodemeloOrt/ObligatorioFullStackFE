@@ -13,8 +13,6 @@ export const getProjectsService = () => {
         }
     })
         .then(response => {
-            console.log('Response data:', response.data);
-            // La API devuelve { projects: [...] }, extraemos solo el array
             return response.data.projects || [];
         })
         .catch(error => {
@@ -33,11 +31,9 @@ export const deleteProjectService = (id) => {
         }
     })
         .then(response => {
-            console.log('Delete project response:', response.data);
             return response.data;
         })
         .catch(error => {
-            console.error('Error in deleteProjectService:', error);
             throw error;
         });
 }
@@ -57,11 +53,9 @@ export const addProjectService = (name, description) => {
         }
     })
         .then(response => {
-            console.log('Add project response:', response.data);
             return response.data;
         })
         .catch(error => {
-            console.error('Error in addProjectService:', error);
             throw error;
         });
 }
@@ -78,7 +72,6 @@ export const addMemberToProjectService = (projectId, userId) => {
         }
     })
         .then(response => {
-            console.log('Add member response:', response.data);
             return response.data;
         })
         .catch(error => {
@@ -97,7 +90,6 @@ export const getAllUsersService = () => {
         }
     })
         .then(response => {
-            console.log('Get all users response:', response.data);
             return response.data.users || response.data || [];
         })
         .catch(error => {

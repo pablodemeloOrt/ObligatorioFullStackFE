@@ -13,10 +13,8 @@ export const getTasksService = (projectId) => {
         }
     })
         .then(response => {
-            console.log('Response data:', response.data);
-            // La API devuelve { tareas: [...] }, extraemos solo el array
             const tareas = response.data.tareas || [];
-            // Normalizamos valores de status que pueda devolver el backend
+
             const normalizeStatus = (s) => {
                 if (s === null || s === undefined) return s;
                 const raw = String(s).toLowerCase();
@@ -77,7 +75,6 @@ export const deleteTaskService = (id) => {
             return response.json();
         })
         .then(json => {
-            console.log(json)
             return json;
         })
 }
@@ -108,7 +105,6 @@ export const updateTaskStatusService = (idTask, newStatus) => {
             return response.json();
         })
         .then(json => {
-            console.log(json)
             return json;
         })
 }
@@ -131,7 +127,6 @@ export const updateTaskService = (idTask, taskData) => {
             return response.json();
         })
         .then(json => {
-            console.log(json)
             return json;
         })
 }

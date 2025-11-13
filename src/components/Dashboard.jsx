@@ -40,7 +40,7 @@ const Dashboard = () => {
   const validarLogueado = () => {
     let localStorage = window.localStorage;
     const token = localStorage.getItem("token");
-    console.log("token", token);
+
     return token != null;
   };
 
@@ -54,12 +54,12 @@ const Dashboard = () => {
 
       dispatch(cargarTareasIniciales(tareasIniciales));
     } catch (error) {
-      console.log("error", error);
+
     }
   };
 
   if (cargandoUsuarios || validandoLogin) {
-    console.log("entro en cargando");
+
     return <Spinner></Spinner>;
   }
 

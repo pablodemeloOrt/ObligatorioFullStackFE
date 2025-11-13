@@ -13,9 +13,6 @@ const App = () => {
     let localStorage = window.localStorage;
     const token = localStorage.getItem("token");
 
-    console.log("token", token, token != null);
-
-    console.log("logueado", logueado);
   }, [logueado]);
 
   return (

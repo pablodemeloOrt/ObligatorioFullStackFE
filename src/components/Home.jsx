@@ -39,7 +39,7 @@ const Home = () => {
   const validarLogueado = () => {
     let localStorage = window.localStorage;
     const token = localStorage.getItem("token");
-    console.log("token", token);
+
     return token != null;
   };
 
@@ -53,12 +53,11 @@ const Home = () => {
 
       dispatch(cargarProyectosIniciales(proyectosIniciales));
     } catch (error) {
-      console.log("error", error);
-    }
+    } 
   };
 
   if (cargandoUsuarios || validandoLogin) {
-    console.log("entro en cargando");
+
     return <Spinner></Spinner>;
   }
 

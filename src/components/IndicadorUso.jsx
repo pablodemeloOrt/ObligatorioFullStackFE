@@ -16,7 +16,6 @@ const UsageIndicator = () => {
     loadUserPlan();
     
     const handlePlanUpdate = (event) => {
-      console.log("Plan actualizado, recargando...", event.detail);
       loadUserPlan();
     };
     
@@ -35,7 +34,6 @@ const UsageIndicator = () => {
         setUserPlan(userData.plan || Plan.PLUS);
       }
     } catch (error) {
-      console.log("Error loading user plan:", error);
       setUserPlan(Plan.PLUS);
     } finally {
       setLoading(false);

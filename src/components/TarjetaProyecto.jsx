@@ -25,11 +25,8 @@ const TarjetaProyecto = ({ _id, id, name, description, members, createdAt }) => 
     try {
       setError("");
       const result = await deleteProjectService(projectId);
-      console.log("result", result);
-
       dispatch(deleteProjectSlice(projectId));
     } catch (error) {
-      console.log("error", error);
 
       // Mostrar error en pantalla
       let errorMessage = "Error al eliminar el proyecto";

@@ -29,21 +29,17 @@ const Registrar = () => {
     }
 
     try {
-      console.log("Intentando registrar con:", valores);
       const response = await registerService(
         valores.name, 
         valores.email, 
         valores.password, 
         profileImageUrl
       );
-      console.log("Respuesta del registro:", response);
 
       // Mostrar mensaje de éxito y navegar a login
       setSuccess("Registro exitoso. Redirigiendo a login...");
       setTimeout(() => navigate("/login"), 1200);
     } catch (error) {
-      console.log("Error en registro:", error);
-
       if (error.response) {
         setError(error.response.data.message || "No se pudo registrar");
       } else if (error.request) {

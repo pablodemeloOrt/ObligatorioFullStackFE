@@ -15,7 +15,6 @@ const projectSlice = createSlice({
         addProjectSlice: (state, action) => {
             const newProject = action.payload;
             state.push(newProject);
-            console.log("state en redux", state);
         },
 
         //funcion para borrar proyecto
