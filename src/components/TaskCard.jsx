@@ -214,7 +214,7 @@ const TaskCard = ({ _id, id, title, description, assignedTo, status, createdAt }
                   En Progreso
                 </Dropdown.Item>
                 <Dropdown.Item onClick={() => handleStatusChange("testing")} disabled={status === "testing"}>
-                  esting
+                  Testing
                 </Dropdown.Item>
                 <Dropdown.Item onClick={() => handleStatusChange("done")} disabled={status === "done"}>
                   Completado
