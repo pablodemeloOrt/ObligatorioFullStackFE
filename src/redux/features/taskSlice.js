@@ -17,7 +17,8 @@ const taskSlice = createSlice({
 
         //funcion para agregar tareas
         addTaskSlice: (state, action) => {
-            state.tasks.push(action.payload);
+            const newTask = action.payload.tarea || action.payload;
+            state.tasks.unshift(newTask);
         },
 
         //funcion para borrar tarea

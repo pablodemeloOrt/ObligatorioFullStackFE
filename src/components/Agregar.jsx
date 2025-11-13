@@ -32,8 +32,9 @@ const Agregar = ({ projectId }) => {
 
     try {
       const created = await addTaskService({ title, description, projectId });
-      const createdTask = created?.payload || created?.data || created;
+      const createdTask = created.tarea || created.payload || created.data || created;
       dispatch(addTaskSlice(createdTask));
+
 
       setSuccess(true);
       setTimeout(() => {
