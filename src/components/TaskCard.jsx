@@ -23,7 +23,6 @@ const TaskCard = ({ _id, id, title, description, assignedTo, status, createdAt }
       await deleteTaskService(taskId);
       dispatch(deleteTaskSlice(taskId));
     } catch (error) {
-      console.log("error", error);
       let errorMessage = "Error al eliminar la tarea";
       
       // El servicio usa fetch, el error viene en error.message como "Error 403: Forbidden"
@@ -43,7 +42,6 @@ const TaskCard = ({ _id, id, title, description, assignedTo, status, createdAt }
       await updateTaskStatusService(taskId, newStatus);
       dispatch(updateTaskStatusSlice({ id: taskId, status: newStatus }));
     } catch (error) {
-      console.log("error", error);
       let errorMessage = "Error al actualizar el status";
       
       // El servicio usa fetch, el error viene en error.message como "Error 403: Forbidden"
@@ -87,7 +85,6 @@ const TaskCard = ({ _id, id, title, description, assignedTo, status, createdAt }
       dispatch(updateTaskSlice({ id: taskId, title: editTitle, description: editDescription }));
       setIsEditing(false);
     } catch (error) {
-      console.log("error", error);
       let errorMessage = "Error al actualizar la tarea";
       
       if (error.message && error.message.includes("403")) {

@@ -23,7 +23,6 @@ const Menu = ({ title = "Menu" }) => {
         setProfileImage(userData.profileImage || null);
       }
     } catch (error) {
-      console.log("Error loading user plan:", error);
       setUserPlan(Plan.PLUS);
     }
   };

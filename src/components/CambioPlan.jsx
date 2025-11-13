@@ -25,7 +25,6 @@ const CambioPlan = () => {
         setUserPlan(userData.plan || Plan.PLUS);
       }
     } catch (error) {
-      console.log("Error loading user plan:", error);
       setUserPlan(Plan.PLUS);
     } finally {
       setLoading(false);
@@ -54,8 +53,7 @@ const CambioPlan = () => {
       // Limpiar mensaje después de 5 segundos
       setTimeout(() => setMessage(""), 5000);
     } catch (error) {
-      console.log("Error upgrading plan:", error);
-      console.log("Error response:", error.response);
+
       let errorMessage = "Error al actualizar el plan";
       
       if (error.response?.status === 400) {

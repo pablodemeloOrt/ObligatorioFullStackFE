@@ -8,15 +8,12 @@ export const getUsersSlice = createAsyncThunk(
         const { signal } = thunkAPI;
 
         signal.addEventListener('abort', () => {
-            console.log('Se cancela llamada user')
             controller.abort();
         });
 
         try {
-            console.log('inicia fectch user');
             const result = await getUserServices(controller);
             const data = result.data;
-            console.log('data', data)
             return data;
         } catch (err) {
             if (err.name === 'AbortError') {
@@ -24,8 +21,5 @@ export const getUsersSlice = createAsyncThunk(
             }
             return thunkAPI.rejectWithValue('Error al obtener usuarios');
         }
-        // finally {
-        //     dispatch(stopLoading());
-        // }
     }
 )

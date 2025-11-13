@@ -14,7 +14,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const validationSchema = useMemo(() => {
-    console.log("cambio el memo");
+
     return getLoginSchema(t);
   }, [i18n.language]);
   
@@ -26,9 +26,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      console.log("Intentando login con:", valores);
       const response = await loginService(valores.email, valores.password);
-      console.log("Respuesta del login:", response);
 
       // Guardar token y userId en localStorage
       let localStorage = window.localStorage;
@@ -43,7 +41,6 @@ const Login = () => {
       // Navegar al dashboard
       navigate("/");
     } catch (error) {
-      console.log("Error en login:", error);
       
       // Manejar diferentes tipos de errores
       if (error.response) {

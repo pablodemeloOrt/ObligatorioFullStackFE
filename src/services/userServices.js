@@ -64,7 +64,6 @@ export const registerService = async (name, email, password, profileImage = null
 
 export const upgradePlanService = async (userId) => {
     const token = localStorage.getItem('token');
-    console.log("userId en service:", userId);
     try {
         const response = await axios.patch(
             `${urlBase}/users/plan/upgrade/${userId}`,

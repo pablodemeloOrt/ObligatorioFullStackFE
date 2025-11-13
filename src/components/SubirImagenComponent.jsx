@@ -88,8 +88,6 @@ const SubirImagenComponent = ({
       if (onImageUploaded) {
         onImageUploaded(result.secure_url);
       }
-
-      console.log("Imagen subida exitosamente:", result);
     } catch (err) {
       console.error("Error al procesar/subir imagen:", err);
       setError("Error al subir la imagen. Intenta de nuevo.");

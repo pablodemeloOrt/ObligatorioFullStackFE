@@ -16,17 +16,11 @@ const Graficas = () => {
     const valores = Object.values(objetoCompletadas);
     const listaUserID = Object.keys(objetoCompletadas);
 
-    console.log("valores", valores);
-    console.log("listaUserID", listaUserID);
-
-    console.log("objetoCompletadas", objetoCompletadas);
-
     setTareasCompletadas(valores);
     setListaUsuarios(listaUserID);
   }, [listaTareas]);
 
   const callback = (acc, tarea) => {
-    console.log("acc", acc);
     if (tarea.completed) {
       if (acc[tarea.userId]) {
         acc[tarea.userId] = acc[tarea.userId] + 1;
